@@ -11,10 +11,13 @@ from sklearn.model_selection import train_test_split
 
 
 class Dataset:
-        def __init__(self,file_path="/Users/ykarmim/Documents/Cours/Master/M2/REDS/data/training.csv"):
-
+        def __init__(self,file_path="/Users/ykarmim/Documents/Cours/Master/M2/REDS/data/training.csv",drop_weight=True):
+                """
+                drop_weight : Booléen pour supprimer l'attribut Weight de nos données.
+                """
                 self.higgs_df =  pd.read_csv(file_path)
-        
+                if drop_weight:
+                        self.higgs_df= self.higgs_df.drop(['Weight'],axis=1)
         
         def __getX_Y__(self):
 
@@ -25,7 +28,7 @@ class Dataset:
 
         def drop_column_df(self,columns_to_drop):
 
-                self.higgs_df = self.higgs_df(columns_to_drop,axis=1)
+                self.higgs_df = self.higgs_df.drop(columns_to_drop,axis=1)
                 return self.higgs_df
         
         def __get_df__(self):

@@ -35,4 +35,4 @@ class Evaluation:
         print("|xxxxxxxxxxxxx|   RECALL    = {:.{prec}f}    |xxxxxxxxxxxx|".format(recall_score(ytrue,ypred,pos_label="s"),prec=prec))
         print("|xxxxxxxxxxxxx|   PRECISION = {:.{prec}f}    |xxxxxxxxxxxx|".format(precision_score(ytrue,ypred,pos_label="s"),prec=prec))
         print("|xxxxxxxxxxxxx|   SCORE F1  = {:.{prec}f}    |xxxxxxxxxxxx|\n\n".format(f1_score(ytrue,ypred,pos_label="s"),prec=prec))
-        print("-----------------------------------------------------------")
+        #print("---------------- Evaluation {} -----------------".format(model_name))
