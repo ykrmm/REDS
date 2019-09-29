@@ -89,7 +89,7 @@ if __name__ == "__main__":
     
     # Arbre de decision de profondeur 1 Weight = False
     
-    Xtrain,Xtest, ytrain,ytest = dataset.split_train_test()
+    
     tree_1 = DecisionTreeClassifier(random_state=0,max_depth=1)
     tree_1.fit(Xtrain,ytrain)
     ypred = tree_1.predict(Xtest)
