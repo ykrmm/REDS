@@ -12,7 +12,9 @@ from sklearn import tree
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import ExtraTreesClassifier
-
+from sklearn.ensemble import BaggingClassifier
+from sklearn.ensemble import AdaBoostClassifier
+#from sklearn.ensemble import HistGradientBoostingRegressor
 
 
 
@@ -100,3 +102,22 @@ if __name__ == "__main__":
     Evaluation.affichage_score("Extra Trees bootstrap = True ",ytest,ypred)
 
     # à faire cross val pour les hyper paramètres
+
+    # Bagging 
+
+    bagging = BaggingClassifier(n_estimators=10)
+    bagging.fit(Xtrain,ytrain)
+    ypred = bagging.predict(Xtest)
+    Evaluation.affichage_score("Bagging n_estimators = 10 ",ytest,ypred)
+
+    bagging1 = BaggingClassifier(n_estimators=100)
+    bagging1.fit(Xtrain,ytrain)
+    ypred = bagging1.predict(Xtest)
+    Evaluation.affichage_score("Bagging n_estimators = 100 ",ytest,ypred)
+
+
+    # AdaBoost
+    adaboost = AdaBoostClassifier()
+    adaboost.fit(Xtrain,ytrain)
+    ypred = adaboost.predict(Xtest)
+    Evaluation.affichage_score("Adaboost ",ytest,ypred)

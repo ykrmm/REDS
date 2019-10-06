@@ -1,5 +1,5 @@
 from sklearn.metrics import accuracy_score,recall_score,precision_score,f1_score
-
+import numpy as np
 
 """
     Class qui nous permet d'évaluer nos modèles et de réaliser des affichages.
@@ -25,8 +25,21 @@ class Evaluation:
     def f1(ytrue,ypred):
         return f1_score(ytrue,ypred)
 
+    
+    def AMS(self,ytrue,ypred,weights):
+        s=0
+        b=0
+        for i in range(len(ytrue)):
+            if (ypred[i]=='s'):
+                if (ytrue=='b'):
+                    b+=weights[i]
+                else :
+                    s+=weights[i]
+        AMS = np.sqrt(2*((s+b+10)*np.log(1+(s/(b+10)))-s))
+        return AMS
+
     @staticmethod
-    def affichage_score(model_name,ytrue,ypred,prec=4):
+    def affichage_score(model_name,ytrue,ypred,weights=None,prec=4):
         """
             model_name : nom du modèle utilisé pour l'affichage
         """
@@ -34,5 +47,5 @@ class Evaluation:
         print("|xxxxxxxxxxxxx|   ACCURACY  = {:.{prec}f}    |xxxxxxxxxxxx|".format(accuracy_score(ytrue,ypred),prec=prec))
         print("|xxxxxxxxxxxxx|   RECALL    = {:.{prec}f}    |xxxxxxxxxxxx|".format(recall_score(ytrue,ypred,pos_label="s"),prec=prec))
         print("|xxxxxxxxxxxxx|   PRECISION = {:.{prec}f}    |xxxxxxxxxxxx|".format(precision_score(ytrue,ypred,pos_label="s"),prec=prec))
-        print("|xxxxxxxxxxxxx|   SCORE F1  = {:.{prec}f}    |xxxxxxxxxxxx|\n\n".format(f1_score(ytrue,ypred,pos_label="s"),prec=prec))
-        #print("---------------- Evaluation {} -----------------".format(model_name))
+        print("|xxxxxxxxxxxxx|   SCORE F1  = {:.{prec}f}    |xxxxxxxxxxxx|".format(f1_score(ytrue,ypred,pos_label="s"),prec=prec))
+        #print("|xxxxxxxxxxxxx|   AMS SCORE = {:.{prec}f}    |xxxxxxxxxxxx|\n\n".format(self.AMS(ytrue, ypred,weights),prec=prec))

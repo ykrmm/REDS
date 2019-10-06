@@ -45,7 +45,7 @@ class Frequency:
 
 if __name__ == "__main__":
 
-    """
+    
     dataset = Dataset(drop_weight=False)
     higgs_df = dataset.__get_df__()
     X,y = dataset.__getX_Y__()
@@ -79,7 +79,7 @@ if __name__ == "__main__":
     tree_1.fit(Xtrain,ytrain)
     ypred = tree_1.predict(Xtest)
     Evaluation.affichage_score("Decision Tree Depth 1 Weight = True",ytest,ypred)
-    """
+    
 
 
     dataset = Dataset(drop_weight=True)
@@ -102,7 +102,7 @@ if __name__ == "__main__":
     ypred = tree_1.predict(Xtest)
     Evaluation.affichage_score("Decision Tree Depth 2 Weight = False",ytest,ypred)
 
-    """# Naive Bayes Weight = False
+    # Naive Bayes Weight = False
 
     gnb = GaussianNB()
     ypred1 = gnb.fit(Xtrain, ytrain).predict(Xtest)
@@ -120,4 +120,4 @@ if __name__ == "__main__":
     svc = LinearSVC(random_state=0, tol=1e-5)
     svc.fit(Xtrain,ytrain)
     ypred_svc = svc.predict(Xtest)   
-    Evaluation.affichage_score("SVM Linear SVC",ytest,ypred_svc)"""
+    Evaluation.affichage_score("SVM Linear SVC",ytest,ypred_svc)
