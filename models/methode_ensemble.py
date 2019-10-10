@@ -33,19 +33,20 @@ from sklearn.ensemble import AdaBoostClassifier
 
 if __name__ == "__main__":
     dataset = Dataset(drop_weight=True)
-    higgs_df = dataset.__get_df__()
-    X,y = dataset.__getX_Y__()
-    Xtrain,Xtest, ytrain,ytest = dataset.split_train_test()
+    higgs_df = dataset.get_df()
+    Xtrain,Xtest, ytrain,ytest = dataset.split_train_test(fill_nan=True)
+    weight_train,weight_test = dataset.get_weight_train_test()
+    eval_ = Evaluation()
 
-    """
+    
     #Decision tree automatic depth
 
     tree_1 = DecisionTreeClassifier(random_state=0)
     tree_1.fit(Xtrain,ytrain)
     ypred = tree_1.predict(Xtest)
     ypred_train = tree_1.predict(Xtrain)
-    Evaluation.affichage_score("Decision Tree automatic depth Weight = False, Test",ytest,ypred)
-    Evaluation.affichage_score("Decision Tree automatic depth Weight = False, Train",ytrain,ypred_train)
+    eval_.affichage_score("Decision Tree automatic depth Weight = False, Test",ytest,ypred,weights=weight_test)
+    eval_.affichage_score("Decision Tree automatic depth Weight = False, Train",ytrain,ypred_train,weights=weight_train)
     
 
 
@@ -56,9 +57,9 @@ if __name__ == "__main__":
     tree_1.fit(Xtrain,ytrain)
     ypred = tree_1.predict(Xtest)
     ypred_train = tree_1.predict(Xtrain)
-    Evaluation.affichage_score("Decision Tree  depth 5 Weight = False, Test",ytest,ypred)
-    Evaluation.affichage_score("Decision Tree  depth 5 Weight = False, Train",ytrain,ypred_train)
-    """
+    eval_.affichage_score("Decision Tree  depth 5 Weight = False, Test",ytest,ypred,weights=weight_test)
+    eval_.affichage_score("Decision Tree  depth 5 Weight = False, Train",ytrain,ypred_train,weights=weight_train)
+    
     # à faire : cross val pour trouver le meilleur hyper paramètre pour la profondeur maximal de l'arbre 
 
 
@@ -67,14 +68,14 @@ if __name__ == "__main__":
     rf = RandomForestClassifier(n_estimators=100,bootstrap=True,max_depth=5)
     rf.fit(Xtrain,ytrain)
     ypred = rf.predict(Xtest)
-    Evaluation.affichage_score("Random Forest bootstrap = True ",ytest,ypred)
+    eval_.affichage_score("Random Forest bootstrap = True ",ytest,ypred,weights=weight_test)
 
     rf = RandomForestClassifier(n_estimators=100,bootstrap=False,max_depth=5)
     rf.fit(Xtrain,ytrain)
     ypred = rf.predict(Xtest)
-    Evaluation.affichage_score("Random Forest bootstrap = False ",ytest,ypred)
+    eval_.affichage_score("Random Forest bootstrap = False ",ytest,ypred,weights=weight_test)
      # à faire cross val pour les hyper-paramètres
-
+   
      # Extra Trees 
 
     """Extra trees classifier.
@@ -88,36 +89,36 @@ if __name__ == "__main__":
        This usually allows to reduce the variance of the model a bit more, at
        the expense of a slightly greater increase in bias:
     """
-
+    
     # bootstrap = False
     et = ExtraTreesClassifier(n_estimators=100,max_depth=5,bootstrap=False)
     et.fit(Xtrain,ytrain)
     ypred = et.predict(Xtest)
-    Evaluation.affichage_score("Extra Trees bootstrap = False ",ytest,ypred)
+    eval_.affichage_score("Extra Trees bootstrap = False ",ytest,ypred,weights=weight_test)
 
     # bootstrap = True
     et = ExtraTreesClassifier(n_estimators=100,max_depth=5,bootstrap=True)
     et.fit(Xtrain,ytrain)
     ypred = et.predict(Xtest)
-    Evaluation.affichage_score("Extra Trees bootstrap = True ",ytest,ypred)
+    eval_.affichage_score("Extra Trees bootstrap = True ",ytest,ypred,weights=weight_test)
 
     # à faire cross val pour les hyper paramètres
 
     # Bagging 
-
+    
     bagging = BaggingClassifier(n_estimators=10)
     bagging.fit(Xtrain,ytrain)
     ypred = bagging.predict(Xtest)
-    Evaluation.affichage_score("Bagging n_estimators = 10 ",ytest,ypred)
+    eval_.affichage_score("Bagging n_estimators = 10 ",ytest,ypred,weights=weight_test)
 
     bagging1 = BaggingClassifier(n_estimators=100)
     bagging1.fit(Xtrain,ytrain)
     ypred = bagging1.predict(Xtest)
-    Evaluation.affichage_score("Bagging n_estimators = 100 ",ytest,ypred)
+    eval_.affichage_score("Bagging n_estimators = 100 ",ytest,ypred,weights=weight_test)
 
 
     # AdaBoost
     adaboost = AdaBoostClassifier()
     adaboost.fit(Xtrain,ytrain)
     ypred = adaboost.predict(Xtest)
-    Evaluation.affichage_score("Adaboost ",ytest,ypred)
+    eval_.affichage_score("Adaboost ",ytest,ypred,weights=weight_test)
