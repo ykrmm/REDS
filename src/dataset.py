@@ -83,8 +83,8 @@ class Dataset:
                         self.higgs_df_private= self.higgs_df_private.drop(['KaggleSet'],axis=1)
                 except:
                         print("Les colonnes kaggleset n'ont pas pu être supprimés")
-
-                self._fill_nan_values() # Replace nan value by the mean average of train's columns.
+                if fill_nan:
+                        self._fill_nan_values() # Replace nan value by the mean average of train's columns.
 
                 self.weight_train = self.higgs_df_train['KaggleWeight'].values
                 self.weight_test = self.higgs_df_private['KaggleWeight'].values
