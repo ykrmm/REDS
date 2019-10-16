@@ -9,20 +9,20 @@ class Evaluation:
     def __init__(self):
         pass
 
-    @staticmethod
-    def accuracy(ytrue,ypred):
+    
+    def accuracy(self,ytrue,ypred):
         return accuracy_score(ytrue,ypred)
 
-    @staticmethod
-    def precision(ytrue,ypred):
+
+    def precision(self,ytrue,ypred):
         return precision_score(ytrue,ypred) 
     
-    @staticmethod
-    def rappel(ytrue,ypred):
+    
+    def rappel(self,ytrue,ypred):
         return recall_score(ytrue,ypred)
 
-    @staticmethod
-    def f1(ytrue,ypred):
+    
+    def f1(self,ytrue,ypred):
         return f1_score(ytrue,ypred)
 
     
