@@ -15,15 +15,15 @@ class Evaluation:
 
 
     def precision(self,ytrue,ypred):
-        return precision_score(ytrue,ypred) 
+        return precision_score(ytrue,ypred,pos_label='s') 
     
     
     def rappel(self,ytrue,ypred):
-        return recall_score(ytrue,ypred)
+        return recall_score(ytrue,ypred,pos_label='s')
 
     
     def f1(self,ytrue,ypred):
-        return f1_score(ytrue,ypred)
+        return f1_score(ytrue,ypred,pos_label='s')
 
     
     def AMS(self,ytrue,ypred,weights):

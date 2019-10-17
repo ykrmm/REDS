@@ -11,7 +11,7 @@ from sklearn.model_selection import train_test_split
 
 
 class Dataset:
-        def __init__(self,file_path="/Users/ykarmim/Documents/Cours/Master/M2/REDS/data/cern/atlas-higgs-challenge-2014-v2.csv",drop_weight=True):
+        def __init__(self,file_path="/home/karmim/M2/REDS/data/atlas-higgs-challenge-2014-v2.csv",drop_weight=True):
                 """
                 drop_weight : Booléen pour supprimer l'attribut Weight de nos données d'apprentissage  et de test.
                 """

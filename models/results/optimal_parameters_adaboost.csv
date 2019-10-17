@@ -1,0 +1,2 @@
+models,params,AMS
+AdaBoost,"{'algorithm': 'SAMME.R', 'base_estimator': None, 'learning_rate': 0.05, 'n_estimators': 50, 'random_state': None}",2.662528760599719
