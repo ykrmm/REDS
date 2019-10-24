@@ -11,7 +11,7 @@ from sklearn.model_selection import train_test_split
 
 
 class Dataset:
-        def __init__(self,file_path="/home/karmim/M2/REDS/data/atlas-higgs-challenge-2014-v2.csv",drop_weight=True):
+        def __init__(self,file_path="../data/cern/atlas-higgs-challenge-2014-v2.csv",drop_weight=True):
                 """
                 drop_weight : Booléen pour supprimer l'attribut Weight de nos données d'apprentissage  et de test.
                 """
@@ -24,7 +24,10 @@ class Dataset:
                         self.higgs_df = self.higgs_df.drop(['Weight'],axis=1) # On a besoin de conserver les poids pour l'évaluation AMS.
                 
         
-
+        def columns_to_keep(self,columns_to_keep):
+                for col in self.higgs_df.columns:
+                        if col not in columns_to_keep:
+                                self.higgs_df = self.higgs_df.drop([col],axis=1)
         def drop_column_df(self,columns_to_drop):
                 # Call this function before split_train_test. So it will delete columns for all dataset.
                 self.higgs_df = self.higgs_df.drop(columns_to_drop,axis=1)

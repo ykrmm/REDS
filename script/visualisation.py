@@ -32,5 +32,5 @@ print("Pourcentage de lignes contenant des données manquantes : ",cpt/X.shape[0
 
 df_nan = higgs_df== -999.0
 
-#count_nan = df_nan.sum(0)
-#count_nan.plot.bar()
+count_nan = df_nan.sum(0)
+count_nan.plot.bar()
